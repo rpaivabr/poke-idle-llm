@@ -1,0 +1,53 @@
+<div class="bg-white rounded-2xl p-6 shadow-xs border border-slate-100 flex flex-col items-center text-center">
+  <!-- Title & Subtitle -->
+  <h2 class="text-2xl font-black text-[#e11d48] tracking-tight">Centro Pokémon</h2>
+  <p class="text-sm font-medium text-slate-400 mt-1 mb-5">A Enfermeira Joy está esperando.</p>
+
+  <!-- Chansey Sprite -->
+  <div class="relative w-40 h-40 flex items-center justify-center my-3 overflow-visible">
+    <img 
+      [src]="chanseySprite" 
+      alt="Chansey"
+      class="w-28 h-28 object-contain pixelated transition-transform select-none drop-shadow-sm scale-[1.7]"
+      [class.animate-pulse-subtle]="isHealing()"
+    />
+  </div>
+
+  <!-- Energy Status Box -->
+  <div class="w-full bg-[#f8fafc] rounded-2xl p-4 border border-slate-100 my-4 text-left">
+    <div class="flex items-center justify-between text-xs font-black tracking-wider text-slate-400 mb-2">
+      <span>ENERGIA DO TIME</span>
+      <span class="text-slate-500 font-extrabold text-xs">
+        {{ gameService.energy() }}
+      </span>
+    </div>
+
+    <!-- Progress Track -->
+    <div class="h-3 w-full bg-slate-200/70 rounded-full overflow-hidden p-0.5">
+      <div 
+        class="h-full rounded-full bg-[#4ade80] transition-all duration-300 ease-out"
+        [style.width.%]="gameService.energy()"
+      ></div>
+    </div>
+  </div>
+
+  <!-- Action Button -->
+  <div class="w-full mt-2">
+    @if (!gameService.isFullEnergy()) {
+      <button
+        (click)="onHeal()"
+        class="w-full py-3.5 px-4 rounded-xl font-black text-base flex items-center justify-center gap-2 bg-[#e11d48] hover:bg-[#be123c] active:scale-[0.98] text-white shadow-sm shadow-rose-200 transition-all cursor-pointer select-none"
+      >
+        <span>💖</span>
+        <span>Recuperar Saúde</span>
+      </button>
+    } @else {
+      <button
+        disabled
+        class="w-full py-3.5 px-4 rounded-xl font-black text-base flex items-center justify-center gap-2 bg-[#f1f5f9] text-slate-400 cursor-not-allowed select-none transition-all"
+      >
+        <span>Energia Cheia</span>
+      </button>
+    }
+  </div>
+</div>

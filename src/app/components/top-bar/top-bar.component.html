@@ -1,0 +1,31 @@
+<header class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between">
+  <!-- Logo -->
+  <div class="flex items-center">
+    <span class="text-2xl font-black italic tracking-tight text-red-500">Poké</span>
+    <span class="text-2xl font-black italic tracking-tight text-slate-800">Idle</span>
+  </div>
+
+  <!-- Currency Badges -->
+  <div class="flex items-center gap-2.5">
+    <!-- PokéDólares Badge -->
+    <div class="flex items-center gap-2 bg-[#f3f6fb] px-3.5 py-1.5 rounded-xl border border-slate-200/60 shadow-xs">
+      <!-- Money Bag Icon -->
+      <span class="text-xl leading-none select-none">💰</span>
+      <span class="font-extrabold text-slate-800 text-sm tracking-wide">
+        {{ gameService.pokeDollars() }}
+      </span>
+    </div>
+
+    <!-- Energy Badge -->
+    <div class="flex items-center gap-2 bg-[#f3f6fb] px-3.5 py-1.5 rounded-xl border border-slate-200/60 shadow-xs">
+      <!-- Lightning Icon -->
+      <span class="text-xl leading-none select-none">⚡</span>
+      <span 
+        class="font-extrabold text-sm tracking-wide transition-colors"
+        [ngClass]="gameService.energy() === 0 ? 'text-red-500' : 'text-slate-800'"
+      >
+        {{ gameService.energy() }}
+      </span>
+    </div>
+  </div>
+</header>

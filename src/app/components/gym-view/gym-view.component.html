@@ -1,0 +1,41 @@
+<div class="bg-white rounded-2xl p-6 shadow-xs border border-slate-100 flex flex-col items-center text-center">
+  <!-- Title & Subtitle -->
+  <h2 class="text-2xl font-black text-[#193b68] tracking-tight">Arena de Treino</h2>
+  <p class="text-sm font-medium text-slate-400 mt-1 mb-6">Treine para ganhar PokéDólares!</p>
+
+  <!-- Pokémon Sprite Area -->
+  <div class="relative w-40 h-40 flex items-center justify-center my-3 overflow-visible">
+    <img 
+      [src]="pokemonSprite" 
+      alt="Bulbasaur"
+      class="w-28 h-28 object-contain pixelated transition-transform select-none drop-shadow-sm scale-[1.75]"
+      [class.animate-shake]="isAttacking()"
+    />
+  </div>
+
+  <!-- Action Button -->
+  <div class="w-full mt-6">
+    <button
+      (click)="onBattle()"
+      [disabled]="!gameService.canBattle()"
+      class="w-full py-3.5 px-4 rounded-xl font-black text-base flex items-center justify-center gap-1.5 transition-all shadow-sm select-none"
+      [ngClass]="
+        gameService.canBattle()
+          ? 'bg-[#ef3636] hover:bg-[#dc2626] active:scale-[0.98] text-white cursor-pointer shadow-red-200'
+          : 'bg-[#cbd5e1] text-white/95 cursor-not-allowed'
+      "
+    >
+      <span>Batalhar (-10</span>
+      <span class="text-yellow-300 drop-shadow-xs">⚡</span>
+      <span>)</span>
+    </button>
+
+    <!-- Exhausted Warning Box -->
+    @if (gameService.isExhausted()) {
+      <div class="mt-4 p-4 rounded-r-xl border-l-4 border-amber-500 bg-[#fef9c3]/70 text-left transition-all">
+        <h4 class="font-extrabold text-[#9a3412] text-sm">Pokémon Exausto!</h4>
+        <p class="text-xs font-semibold text-[#b45309] mt-0.5">Vá ao Centro Pokémon para descansar.</p>
+      </div>
+    }
+  </div>
+</div>
